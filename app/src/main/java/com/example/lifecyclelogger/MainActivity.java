@@ -22,30 +22,51 @@ import androidx.appcompat.app.AppCompatActivity;
  */
 public class MainActivity extends AppCompatActivity {
 
-    // TAG לשימוש ב-Log - השתמשו בזה בכל ההודעות
     private static final String TAG = "LifecycleDemo";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.d(TAG, "onCreate called");
+
+        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
-        
-        // TODO: הוסיפו כאן הודעת Log.d() שאומרת שנקראה onCreate
-        
+
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
+            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+            return insets;
+        });
     }
 
-    // TODO: הוסיפו את הפונקציה onStart() עם הודעת Log
-    
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Log.d(TAG, "onStart called");
+    }
 
-    // TODO: הוסיפו את הפונקציה onResume() עם הודעת Log
-    
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.d(TAG, "onResume called");
+    }
 
-    // TODO: הוסיפו את הפונקציה onPause() עם הודעת Log
-    
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Log.d(TAG, "onPause called");
+    }
 
-    // TODO: הוסיפו את הפונקציה onStop() עם הודעת Log
-    
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Log.d(TAG, "onStop called");
+    }
 
-    // TODO: הוסיפו את הפונקציה onDestroy() עם הודעת Log
-    
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.d(TAG, "onDestroy called");
+    }
 }
+
